@@ -4,8 +4,8 @@ from rest_framework import status
 
 from django.http import Http404, HttpResponse
 
-from .serializers import DepartmentSerializer, EmployeeTypeSerializer, EmployeeSerializer, DeductionSerializer, DeductionEligibilitySerializer, EmployeeDeductionSerializer, CompensationSerializer, CompensationEligibilitySerializer, EmployeeCompensationSerializer
-from employeeManagement_app.models import Departments, EmployeeType, Employees, DeductionEligibility, Deductions, EmployeeDeductions, Compensations, CompensationEligibility, EmployeeCompensations
+from .serializers import DepartmentSerializer, EmployeeTypeSerializer, EmployeeSerializer, DeductionSerializer, EmployeeDeductionSerializer, CompensationSerializer, EmployeeCompensationSerializer
+from employeeManagement_app.models import Departments, EmployeeType, Employees, Deductions, EmployeeDeductions, Compensations, EmployeeCompensations
 
 class DepartmentsList_API(APIView):
     def get(self, request):
@@ -181,24 +181,6 @@ class Deduction_details(APIView):
         d.delete()
         return Response(status=status.HTTP_200_OK, data={'message': 'deleted'})
 
-class DeductionEligibility_list(APIView):
-    def post(self, request):
-        serializer = DeductionEligibilitySerializer(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST, data=serializer.errors)
-
-class DeductionEligibility_details(APIView):
-    def delete(self, request, pk):
-        try:
-            obj = DeductionEligibility.objects.get(id = pk)
-        except:
-            raise Http404
-        obj.delete()
-        return Response(status=status.HTTP_200_OK, data={'message': 'deleted'})
-
 class EmployeeDeduction_list(APIView):
     def post(self, request):
         serializer = EmployeeDeductionSerializer(data = request.data)
@@ -270,24 +252,6 @@ class Compensation_details(APIView):
         comp = self.get_comp(pk)
         comp.delete()
         return Response(status=status.HTTP_200_OK, data = {'message': 'deleted'})
-
-class CompensationEligibility_list(APIView):
-    def post(self, request):
-        serializer = CompensationEligibilitySerializer(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST, data=serializer.errors)
-
-class CompensationEligibility_details(APIView):
-    def delete(self, request, pk):
-        try:
-            obj = CompensationEligibility.objects.get(id = pk)
-        except:
-            raise Http404
-        obj.delete()
-        return Response(status=status.HTTP_200_OK, data={'message': 'deleted'})
 
 class EmployeeCompensation_list(APIView):
     def post(self, request):

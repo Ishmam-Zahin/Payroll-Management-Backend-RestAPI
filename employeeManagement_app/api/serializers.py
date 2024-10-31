@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-from employeeManagement_app.models import Departments, EmployeeType, Employees, Deductions, DeductionEligibility, EmployeeDeductions, Compensations, CompensationEligibility, EmployeeCompensations
+from employeeManagement_app.models import Departments, EmployeeType, Employees, Deductions, EmployeeDeductions, Compensations, EmployeeCompensations
 
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,11 +13,6 @@ class DepartmentSerializer(serializers.ModelSerializer):
 class EmployeeTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = EmployeeType
-        fields = '__all__'
-
-class DeductionEligibilitySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DeductionEligibility
         fields = '__all__'
 
 class DeductionSerializer(serializers.ModelSerializer):
@@ -51,15 +46,6 @@ class EmployeeSerializer(serializers.ModelSerializer):
     compensations = CompensationSerializer(many = True, read_only = True)
     class Meta:
         model = Employees
-        fields = '__all__'
-
-
-class EmployeeSerializerDetail(EmployeeSerializer):
-    ...
-
-class CompensationEligibilitySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CompensationEligibility
         fields = '__all__'
 
 class EmployeeCompensationSerializer(serializers.ModelSerializer):
