@@ -35,7 +35,7 @@ class Deductions(models.Model):
     type = models.CharField(max_length=20, null=False, blank=False, choices=type_choices)
     received_money = models.IntegerField(default=-1)
     give_money = models.IntegerField(default=-1)
-    deduct_per_payslip = models.IntegerField(null=False, blank=False)
+    deduct_per_payslip = models.CharField(max_length=20, null=False, blank=False)
     desc = models.TextField(null=True, default=None)
 
     def __str__(self):
@@ -44,7 +44,8 @@ class Deductions(models.Model):
 class Compensations(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, null=False, blank=False)
-    money_per_payslip = models.IntegerField(default=0)
+    money_per_payslip = models.CharField(max_length=20, null=False, blank=False)
+    minimun_money = models.IntegerField(default=-1)
     desc = models.TextField(null=True, default=None)
 
     def __str__(self):
